@@ -1,0 +1,37 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <input id="id" name="经纪人表主键" underline="true" hidden="hidden"/>
+                            <#input id="name" name="姓名" underline="true"/>
+                            <input id="password" name="密码" underline="true" hidden="hidden"/>
+                            <#input id="mobile" name="手机号" underline="true"/>
+                            <#input id="companyAddress" name="公司地址" underline="true"/>
+                            <input id="areaAdministratorId" name="区域管理员id" hidden="hidden"/>
+                </div>
+
+                <div class="col-sm-6">
+                            <#input id="salesmanName" name="业务员姓名" underline="true"/>
+                            <#input id="state" name="账号状态" underline="true"/>
+                            <#input id="registrationTime" name="注册时间" underline="true"/>
+                            <#input id="expiryTime" name="账号到期时间" underline="true"/>
+                            <input id="qrCode" name="经纪人二维码地址" underline="true" hidden="hidden"/>
+                            <input id="delFlag" name="删除标记 0：未删 1：已删" underline="true" hidden="hidden"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="AppUserInfoDlg.addSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="AppUserInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/appUser/appUser_info.js"></script>
+@}

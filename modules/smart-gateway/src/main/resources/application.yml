@@ -1,0 +1,72 @@
+######################################################################
+############################## 公共配置 ##############################
+######################################################################
+
+server:
+  servlet:
+    contextPath: /gateway
+  port: 8080 #配置服务端口
+#  ssl: #配置使用https
+#    key-store: classpath:aliyun_tomcat.keystore #证书路径
+#    key-store-password: newcapec123 #生成证书时设置的密码
+
+#配置日志输出的文件名称
+logging:
+  file: logs/gateway.log
+
+############################ 下面是springBoot配置 ############################
+spring:
+  profiles: #开发/测试/生产环境分别对应dev/test/prod，可以自由定义
+    active: dev      #开发环境
+#    active: test      #测试环境
+#    active: prod    #生产环境
+
+############################ 上面是springBoot配置 ############################
+
+############################ 下面是用户自定义配置 ############################
+application:
+  project: #项目信息
+    #项目的包路径，根据实际的项目路径进行配置
+    package: cn.newcapec.city.smart.gateway
+#    loadAcpsdk: true #是否加载银联环境
+    loadAcpsdk: false #是否加载银联环境
+  user:
+    pageSize: 10 #用户查询列表每页的大小
+    balanceRemind: 8 #余额不足提醒的阀值，单位：元
+    token:
+      failTime: 360 #用户登录凭证的失效时间，单位小时,24*15
+      timeout: 120 #用户token的超时时间，单位秒 2*60；token超过该时间认为无效，防止第三方截获token发起请求
+      urlTimeout: 7200 #url token的超时时间，单位秒 2*60*60；html页面的token授权时效较长(默认2个小时)，并且不验证重复
+    template: #用户提醒的相关模板
+      balance: 您于?0申请退费。 #申请退费提醒模板
+      recharge: 您于?0充值?1元，交易单号为?2。 #充值提醒模板
+      consume: 您于?0通过乘车码在?1路公交成功消费?2元。 #消费提醒模板
+#################短信验证码相关配置#################
+  sms:
+    #新开普的短信服务
+    url: http://101.37.87.85:8081/sms
+    username: newcapecTest
+    password: 123456
+    body:
+      priority: 1 #短信发送优先级：<0：低; 0：普通； >0：高
+      statusReport: true #是否需要状态报告
+      appCode: #sp短信扩展码，可以为空
+    template:
+      #用户注册的短信验证码内容模板
+      regist: 您注册的验证码为:?（切勿告知他人）
+      #用户登录的短信验证码内容模板
+      login: 您登录的短信验证码为：?（切勿告知他人）
+      #用户修改密码的短信验证码内容模板
+      modifyPwd: 您修改密码的短信验证码为：?（切勿告知他人）
+    pwd: #用户设置密码的短信验证码内容模板
+        template: 您设置密码的短信验证码为：?（切勿告知他人）
+  push: #推送服务
+    timeout: 60000 #推送服务消息监听超时时间，单位毫秒
+    appKey: 1760b777c6fa9825a4bd87ba #极光推送的appKey
+    masterSecret: 80ec3885696355bc1d7a5800 #极光推送的masterSecret
+  #分布式ID配置
+  snowflake:
+    workerId: 0 #工作ID
+    datacenterId: 0 #数据中心ID
+
+############################ 上面是用户自定义配置 ############################

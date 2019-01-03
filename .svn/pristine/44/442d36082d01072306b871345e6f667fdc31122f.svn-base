@@ -1,0 +1,53 @@
+######################################################################
+############################ 开发环境配置 ############################
+######################################################################
+debug: true
+#输出当前项目下debug级别的日志
+logging:
+  level:
+    cn.newcapec.city: debug
+
+############################ 下面是springBoot配置 ############################
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@192.168.112.41:1521/orcl
+    username: QRCODE
+    password: QRCODE
+    ##########################  druid配置   ##########################
+    druid:
+      initialSize: 0 #初始化大小
+      minIdle: 0 #最小
+      maxActive: 50 #最大
+      maxWait: 60000 #配置获取连接等待超时的时间
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000 #配置一个连接在池中最小生存的时间，单位是毫秒
+      #校验SQL，Oracle配置 spring.datasource.validationQuery=SELECT 1 FROM DUAL，如果不配validationQuery项，则下面三项配置无用
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true #打开PSCache，并且指定每个连接上PSCache的大小
+      maxPoolPreparedStatementPerConnectionSize: 20
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      useGlobalDataSourceStat: true #合并多个DruidDataSource的监控数据
+      resetEnable: false #是否启用页面上的“Reset All”功能
+    ##########################  druid配置   ##########################
+  redis: #单机redis，开发环境
+    host: 192.168.112.44
+    port: 6379
+    #Lettuce客户端，与jedis客户端有区别,参考: http://baijiahao.baidu.com/s?id=1600235995436023983&wfr=spider&for=pc
+    lettuce:
+      pool: #redis线程池配置
+        maxIdle: 0 #最大空闲数
+        minIdle: 0 #最小空闲数
+        maxActive: 50 #最大活跃数
+
+############################ 上面是springBoot配置 ############################
+
+############################ 下面是用户自定义配置 ############################
+application:
+
+############################ 上面是用户自定义配置 ############################

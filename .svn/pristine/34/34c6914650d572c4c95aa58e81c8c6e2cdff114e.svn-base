@@ -1,0 +1,44 @@
+######################################################################
+############################ 生产环境配置 ############################
+######################################################################
+
+debug: false
+#输出当前项目下info级别的日志
+logging:
+  level:
+    cn.newcapec.busniess: info
+    org.springframework.security: info
+
+############################ 下面是springBoot配置 ############################
+spring:
+  thymeleaf:
+    cache: true #thymeleaf模板配置，使用缓存
+  redis: #单机redis，阜阳公交现场配置
+    host: 192.168.10.100
+    port: 6379
+    #Lettuce客户端，与jedis客户端有区别,参考: http://baijiahao.baidu.com/s?id=1600235995436023983&wfr=spider&for=pc
+    lettuce:
+      pool: #redis线程池配置
+        maxIdle: 50 #最大空闲数
+        minIdle: 50 #最小空闲数
+        maxActive: 500 #最大活跃数
+
+############################ 上面是springBoot配置 ############################
+
+############################ 下面是用户自定义配置 ############################
+application:
+  user:
+    onlineno:
+      initOddfare: 0 #用户注册的初始化余额，单位（元）
+      initPwd: 888888 #用户注册时的初始化密码
+  file:
+    apk: e:/text/apk/ #APK安装包存放位置
+  pay:
+    recharge: #充值订单的数据
+      name: 颍州通二维码充值 #商品名称
+      describ: 通过颍州通APP进行账户充值 #商品描述
+      minLimit: 100 #充值的最小限额，单位分
+  swagger: #swapper相关配置
+    enable: false #是否启用swapper，生产环境不启用
+
+############################ 上面是用户自定义配置 ############################

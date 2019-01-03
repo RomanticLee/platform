@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.admin.modular.system.dao.AppUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.smart.admin.modular.system.model.AppUser">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="mobile" property="mobile" />
+        <result column="company_address" property="companyAddress" />
+        <result column="area_administrator_id" property="areaAdministratorId" />
+        <result column="salesman_name" property="salesmanName" />
+        <result column="state" property="state" />
+        <result column="registration_time" property="registrationTime" />
+        <result column="expiry_time" property="expiryTime" />
+        <result column="qr_code" property="qrCode" />
+        <result column="del_flag" property="delFlag" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, password, mobile, company_address, area_administrator_id, salesman_name, state, registration_time, expiry_time, qr_code, del_flag
+    </sql>
+    
+    <!-- 根据电话号查询 -->
+    <select id="selectByMobile" resultMap="BaseResultMap">
+    	select 
+    		<include refid="Base_Column_List"></include>
+    	from 
+    		app_user
+    	where
+    		mobile = #{mobile}
+    </select>
+    
+    <!-- 根据电话号和姓名查询 -->
+    <select id="selectByMobileAndName" resultMap="BaseResultMap">
+    	select 
+    		id
+    	from
+    		app_user
+    	where
+    		mobile = #{mobile} and name = #{name}
+    </select>
+
+</mapper>

@@ -1,0 +1,66 @@
+######################################################################
+############################ 开发环境配置 ############################
+######################################################################
+
+debug: true
+#输出当前项目下debug级别的日志
+logging:
+  level:
+    cn.newcapec.busniess: debug
+    org.springframework.security: debug
+
+############################ 下面是springBoot配置 ############################
+spring:
+  thymeleaf:
+    cache: false #thymeleaf模板配置，禁用缓存
+  redis: #单机redis，开发环境
+    host: 192.168.0.134
+    port: 6379
+    #Lettuce客户端，与jedis客户端有区别,参考: http://baijiahao.baidu.com/s?id=1600235995436023983&wfr=spider&for=pc
+    lettuce:
+      pool: #redis线程池配置
+        maxIdle: 0 #最大空闲数
+        minIdle: 0 #最小空闲数
+        maxActive: 50 #最大活跃数
+
+############################ 上面是springBoot配置 ############################
+
+############################ 下面是 Dubbo 配置 ############################
+dubbo:
+  application:
+    #指定当前服务的名称(不要和其他服务同名)
+    name: smart-gateway
+    qos:
+      #禁用QOS
+      enable: false
+  registry: #指定注册中心的位置
+    id: registry2
+    address: zookeeper://127.0.0.1:2181
+    #缓存注册中心列表
+    #配置缓存文件后，应用重启过程中，若注册中心不可用，应用会从该缓存文件读取服务提供者列表，进一步保证应用可靠性
+    file: "${user.home}/output/dubbo.cache"
+  consumer:
+    mock: "return null"
+    #重试次数
+    retries: 2
+    #负载策略
+    loadbalance: roundrobin
+############################ 上面是 Dubbo 配置 ############################
+
+############################ 下面是用户自定义配置 ############################
+application:
+  user:
+    onlineno:
+      initOddfare: 100 #用户注册的初始化余额，单位（元）
+      initPwd: 888888 #用户注册时的初始化密码
+  file:
+    apk: e:/text/apk/ #APK安装包存放位置
+  pay:
+    recharge: #充值订单的数据
+      name: 新开普二维码充值 #商品名称
+      describ: 通过颍州通APP进行账户充值 #商品描述
+      minLimit: 1 #充值的最小限额，单位分
+  swagger: #swapper相关配置
+    enable: true #是否启用swapper
+
+############################ 上面是用户自定义配置 ############################

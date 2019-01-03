@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: dev
+  mvc:
+    static-path-pattern: /static/**
+    view:
+      prefix: /WEB-INF/view
+  devtools:
+    restart:
+      enabled: true
+#      additional-paths: src/main/java
+      exclude: static/**,WEB-INF/view/**
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+
+mybatis-plus:
+  typeAliasesPackage: com.smart.admin.modular.system.model
+  global-config:
+    id-type: 1
+  configuration:
+    key-generators: com.baomidou.mybatisplus.incrementer.OracleKeyGenerator
+
+log:
+  path: d:/smart-logs
+
+beetl:
+  resource-auto-check: true       #热加载beetl模板，开发时候用
+  
+AppUser:
+  redis:
+    loginTime: 604800     #60*60*24*7  登录有效时间
+    intervalTime: 60      #短信验证码间隔时间
+    effectiveTime: 300    #短信验证码有效时间
+    
+    

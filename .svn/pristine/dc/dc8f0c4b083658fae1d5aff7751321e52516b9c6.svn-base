@@ -1,0 +1,38 @@
+######################################################################
+############################## 公共配置 ##############################
+######################################################################
+
+server:
+  servlet:
+    contextPath: /smartCore
+  port: 8081 #配置服务端口
+
+#配置日志输出的文件名称
+logging:
+  file: logs/smartCore.log
+
+############################ 下面是springBoot配置 ############################
+spring:
+  profiles: #开发/测试/生产环境分别对应dev/test/prod，可以自由定义
+    active: dev      #开发环境
+#    active: test      #测试环境
+#    active: prod    #生产环境
+
+############################ 上面是springBoot配置 ############################
+
+############################ 下面是用户自定义配置 ############################
+application:
+  jpa:
+    database: oracle
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.Oracle10gDialect
+  #分布式ID配置
+  snowflake:
+    workerId: 0 #工作ID
+    datacenterId: 1 #数据中心ID
+
+############################ 上面是用户自定义配置 ############################

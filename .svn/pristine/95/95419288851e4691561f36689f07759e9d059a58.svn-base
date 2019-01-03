@@ -1,0 +1,32 @@
+@layout("/common/_container.html"){
+<div class="ibox float-e-margins">
+    <div class="ibox-content">
+        <div class="form-horizontal" id="villageInfoForm">
+
+            <div class="row">
+                <div class="col-sm-6 b-r">
+                            <input id="id" name="小区表主键" value="${item.id}"  hidden="hidden"/><!-- underline="true" -->
+                            <#input id="name" name="小区名" value="${item.name}" underline="true"/>
+                            <#input id="address" name="小区地址" value="${item.address}" />
+                            <button id="getLL">获取经纬度</button>
+                </div>
+
+                <div class="col-sm-6">
+                            <input id="deptId" name="区域id" value="${item.deptId}" hidden="hidden"/><!-- underline="true" -->
+                            <#input id="longitude" name="经度" value="${item.longitude}" underline="true" disabled="disabled"/>
+                            <#input id="latitude" name="纬度" value="${item.latitude}" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="row btn-group-m-t">
+                <div class="col-sm-10">
+                    <#button btnCss="info" name="提交" id="ensure" icon="fa-check" clickFun="VillageInfoDlg.editSubmit()"/>
+                    <#button btnCss="danger" name="取消" id="cancel" icon="fa-eraser" clickFun="VillageInfoDlg.close()"/>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="${ctxPath}/static/modular/system/village/village_info.js"></script>
+@}
